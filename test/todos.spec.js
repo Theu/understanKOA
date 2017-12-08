@@ -1,5 +1,6 @@
 import test from 'ava';
 import request from 'supertest-as-promised'
+import todo from '../routes/todos'
 
 import {app} from '../server';
 
@@ -16,4 +17,14 @@ test('to do list is empty', async testIf => {
     testIf.is(status, 200)
     testIf.is(type, 'application/json')
     testIf.is(body.length, 0)
+});
+
+// to test if a new entry is created
+
+test('create new entry', async testIf => {
+    const {status} = await testIf.context.request.post('/todos').send({
+        title: 'Be awesome'
+    });
+    testIf.is(status, 201)
+    testIf.is(await todo.count(), 1)
 });
