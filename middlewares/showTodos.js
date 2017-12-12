@@ -1,4 +1,4 @@
-import db from './db';
+import db from '../helpers/db';
 
 const showTodos = async () => {
     const result = await db.allDocs({

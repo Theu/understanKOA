@@ -1,5 +1,4 @@
-import PouchDB from 'pouchdb';
-const db = new PouchDB('newDB');
+import db from '../helpers/db';
 
 const putRequestToDataBase = async ctx => {
     const {title} = ctx.request.body;
