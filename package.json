@@ -20,7 +20,8 @@
   "dependencies": {
     "koa": "^2.4.1",
     "koa-bodyparser": "^3.2.0",
-    "koa-router": "^7.3.0"
+    "koa-router": "^7.3.0",
+    "pouchdb": "^6.3.4"
   },
   "devDependencies": {
     "ava": "^0.24.0",
