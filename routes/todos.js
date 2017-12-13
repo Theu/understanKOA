@@ -9,8 +9,8 @@ import updateTodoInDataBase from '../handlerRoutes/updateTodoInDataBase';
 const router = new Router({prefix: '/todos'});
 
 router.get('/', showTodos);
-router.get('/:id', showTodo);
 router.post('/', storeTodoToDataBase);
+router.get('/:id', showTodo);
 router.put('/:id', updateTodoInDataBase);
 router.del('/:id', removeTodoFromDataBase);
 

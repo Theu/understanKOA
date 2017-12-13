@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Todo KOA API",
+    "description": "Provide services to create a to do list. It allows to create, read, update and delete a todo",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Matteo Contini",
+      "email": "matteo.contini@zalando-lounge.de"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "parameters": {
+    "todoPathId": {
+      "name": "id",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "Id of the todo"
+    }
+  },
+  "definitions": {
+    "Todo": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "feed the troll"
+        },
+        "id": {
+          "type": "string",
+          "example": "2017-12-12T12:57:25.413Z"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/todos": {
+      "get": {
+        "summary": "Shows ALL todos stored in DB in a json object",
+        "description": "Shows ALL todos storedi in DB in a json object",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Json representation of what is written in DB",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Todo"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Stores ALL todos in defined DB in a json object",
+        "description": "Stores ALL todos in defined DB in a json object",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "todo",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Json representation of what is written in DB",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/todos/{id}": {
+      "get": {
+        "summary": "Shows single todo stored in DB in a json object at the given ID",
+        "description": "Shows single todo stored in DB in a json object at the given ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/todoPathId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Json representation of what is written in DB regarding a single Todo at given ID used as address"
+          }
+        }
+      },
+      "put": {
+        "summary": "Allows to modify a todo fetched from DB using given ID",
+        "description": "Allows to modify a todo fetched from DB using given ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/todoPathId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Json representation of what is written in DB"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Allows to delete a todo fetched from DB using given ID",
+        "description": "Allows to delete a todo fetched from DB using given ID",
+        "produces": [
+          "nothing"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/todoPathId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "nothing"
+          }
+        }
+      }
+    }
+  }
+}
