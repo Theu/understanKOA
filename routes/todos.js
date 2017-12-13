@@ -1,11 +1,17 @@
 import Router from 'koa-router';
 
-import setBodyRequest from '../middlewares/setBodyRequest';
-import putRequestToDataBase from '../middlewares/putRequestToDataBase';
+import showTodos from '../handlerRoutes/showTodos';
+import showTodo from '../handlerRoutes/showTodo';
+import storeTodoToDataBase from '../handlerRoutes/storeTodoToDataBase';
+import removeTodoFromDataBase from '../handlerRoutes/removeTodoFromDataBase';
+import updateTodoInDataBase from '../handlerRoutes/updateTodoInDataBase';
 
-const router = new Router();
+const router = new Router({prefix: '/todos'});
 
-router.get('/', setBodyRequest);
-router.post('/', putRequestToDataBase);
+router.get('/', showTodos);
+router.get('/:id', showTodo);
+router.post('/', storeTodoToDataBase);
+router.put('/:id', updateTodoInDataBase);
+router.del('/:id', removeTodoFromDataBase);
 
 export default router;
