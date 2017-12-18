@@ -6,7 +6,9 @@ import storeTodoToDataBase from '../handlerRoutes/storeTodoToDataBase';
 import removeTodoFromDataBase from '../handlerRoutes/removeTodoFromDataBase';
 import updateTodoInDataBase from '../handlerRoutes/updateTodoInDataBase';
 
+
 const router = new Router({prefix: '/todos'});
+
 
 router.get('/', showTodos);
 router.post('/', storeTodoToDataBase);
