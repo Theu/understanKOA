@@ -1,13 +1,16 @@
 import Koa from 'koa';
 import bodyparser from 'koa-bodyparser';
 import authenticate from './middlewares/authenticate'
-import Router from 'koa-router';
 import todos from './routes/todos';
 
-const app = new Koa();
-const router = new Router();
+import {users} from './common/users';
+import { authenticationApi } from './helpers/authentication';
 
-app.use(authenticate);
+const app = new Koa();
+
+app.use(authenticate(
+    authenticationApi(users)
+));
 app.use(bodyparser());
 app.use(todos.routes());
 app.listen(3000);
