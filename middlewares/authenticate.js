@@ -1,6 +1,4 @@
-import {
-    decriptBase
-} from '../helpers/decriptBase';
+import  decriptBase from '../helpers/decriptBase';
 // with a real DB I should run a call in order to fetch all username and password to test against (eg: allDocs() and fetch them) here I use an object just for testing
 
 export default function authenticate(authenticateLogin){
