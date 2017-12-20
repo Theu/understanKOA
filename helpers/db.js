@@ -1,26 +1,15 @@
 import PouchDB from 'pouchdb';
 // const db = new PouchDB('newDB');
 
+let instanceOfDb;
 
-
-
-const db = (function () {
-    var instanceOfDb = null;
-    function createInstanceOfDb() {
-        var createDB = new PouchDB('newDB');
-        return createDB;
+export const getDB = () => {
+    console.log('PRIMA', instanceOfDb);
+    if (!instanceOfDb) {
+        instanceOfDb = new PouchDB('newDB');
     }
+    console.log('DOPO', instanceOfDb);
+    return instanceOfDb;
+};
 
-    return {
-        getDB: function() {
-            if (!instanceOfDb) {
-                instanceOfDb = createInstanceOfDb();
-            }
-            return instanceOfDb;
-        }
-    };
-})();
 
-const useDb = db.getDB()
-
-export default useDb;
