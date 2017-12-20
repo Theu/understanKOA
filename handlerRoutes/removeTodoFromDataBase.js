@@ -1,6 +1,6 @@
-import db from '../helpers/db';
+import useDb from '../helpers/db';
 
 export default async function removeTodoFromDataBase(ctx) {
-    db.remove(await db.get(ctx.params.id));
+    useDb.remove(await useDb.get(ctx.params.id));
     ctx.status = 204;
 };

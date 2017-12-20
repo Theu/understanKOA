@@ -1,4 +1,4 @@
-import db from '../helpers/db';
+import useDb from '../helpers/db';
 
 export default async function storeTodoToDataBase(ctx) {
     const todo = {
@@ -6,6 +6,6 @@ export default async function storeTodoToDataBase(ctx) {
         _id: new Date().toISOString(),
         isCompleted: false
     }
-    await db.put(todo);
+    await useDb.put(todo);
     ctx.status = 201;
 };

@@ -1,6 +1,7 @@
-import db from '../helpers/db';
+import useDb from '../helpers/db';
+
 
 export default async function listTodos() {
-    return await db.allDocs({ include_docs: true });
+    return await useDb.allDocs({ include_docs: true });
 };
 

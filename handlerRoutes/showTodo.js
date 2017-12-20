@@ -1,6 +1,6 @@
-import db from '../helpers/db';
+import useDb from '../helpers/db';
 
 export default async function showTodo(ctx) {
-    ctx.body = await db.get(ctx.params.id);
+    ctx.body = await useDb.get(ctx.params.id);
     ctx.status = 200;
 };
