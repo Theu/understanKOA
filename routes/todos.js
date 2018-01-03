@@ -21,7 +21,6 @@ import {
 
 const router = new Router({prefix: '/todos'});
 
-
 router.get('/', showTodos(getTodos));
 router.post('/', storeTodoToDataBase(createTodo));
 router.get('/:id', showTodo(readTodo));

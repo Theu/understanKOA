@@ -1,6 +1,5 @@
-// import getDB from '../helpers/db';
-
 export function createApi(getDB) {
+    // create here a const for getDB
     return {
         getTodos: async () => {
             return await getDB().allDocs({ include_docs: true });
@@ -10,7 +9,7 @@ export function createApi(getDB) {
                 ... request,
                 _id: new Date().toISOString(),
                 isCompleted: false
-            }
+            };
             return await getDB().put(todo);
         },
         readTodo: async (id) => {
