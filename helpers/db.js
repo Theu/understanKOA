@@ -1,5 +1,4 @@
 import PouchDB from 'pouchdb';
-// const db = new PouchDB('newDB');
 
 let instanceOfDb;
 
@@ -9,8 +8,6 @@ export const getDB = () => {
     }
     return instanceOfDb;
 };
-
-let cleanDB;
 
 
 
