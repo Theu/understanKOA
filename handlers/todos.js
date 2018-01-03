@@ -1,20 +1,7 @@
-// export function getHandlers({getTodos, getTodo, createTodo}) {
-//     return {
-//         showTodos: async (ctx) => {
-//             ctx.status = 200;
-//             ctx.body = await getTodos();
-//         },
-//         showTodo: async (ctx) => {
-//             ctx.body = await getTodo(ctx.params.id);
-//             ctx.status = 200;
-//         },
-//     }
-// }
-
 export function showTodos(getTodos) {
     return async function showTodosHandler(ctx) {
-        ctx.status = 200;
         ctx.body = await getTodos();
+        ctx.status = 200;
     };
 }
 

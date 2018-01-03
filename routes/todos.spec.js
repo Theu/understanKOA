@@ -1,27 +1,14 @@
 import Router from 'koa-router';
 import todos from './todos';
-import authenticate from '../middlewares/authenticate';
-import { authenticationApi } from '../helpers/authentication';
 import { users } from '../common/users';
-// import showTodos from '../handlerRoutes/showTodos';
-// import showTodo from '../handlerRoutes/showTodo';
-// import storeTodoToDataBase from '../handlerRoutes/storeTodoToDataBase';
-// import removeTodoFromDataBase from '../handlerRoutes/removeTodoFromDataBase';
-// import updateTodoInDataBase from '../handlerRoutes/updateTodoInDataBase';
 
-import {
-    chai,
-    expect
-} from 'chai';
-
+import chaiHttp from 'chai-http';
 import Koa from 'koa';
 import request from 'supertest';
 
-
-
-
-
-// const router = new Router({prefix: '/todos'});
+const chai = require('chai');
+const should = chai.should();
+chai.use(chaiHttp);
 
 describe('router', () => {
     let app;
@@ -29,20 +16,84 @@ describe('router', () => {
     beforeEach(() => {
         app = new Koa();
         app.use(todos.routes());
-    })
+    });
 
     it('returns 200 if routes exists', (done) => {
 
         request(app.listen())
             .get('/todos')
-            .auth('wolverine', 'optimusprime')
             .expect(200, done)
-    })
+    });
 
     it('returns 404 if routes exists', (done) => {
         request(app.listen())
             .get('/random')
-            .auth('wolverine', 'optimusprime')
             .expect(404, done)
+    });
+});
+
+describe('GET todos', () => {
+    let app;
+
+    beforeEach(() => {
+        app = new Koa();
+        app.use(todos.routes());
+    });
+
+    it('should get object of todos', (done) => {
+        request(app.listen())
+            .get('/todos')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+              done();
+            });
+    });
+
+    it('the returned object should be an array of todos', (done) => {
+        request(app.listen())
+            .get('/todos')
+            .end((err, res) => {
+                res.body.rows.should.be.a('array');
+                done();
+            });
+    });
+
+    it('returns a given todo with a given id', (done) => {
+        request(app.listen())
+            .get('/todos/2018-01-02T15:13:58.630Z')
+            .end((err, res) => {
+                res.body.should.be.a('object');
+                done();
+            });
+    });
+});
+
+describe('POST todo', () => {
+    let app;
+    let todo = { 'TESTER': {
+        title: 'TEST TODO',
+        isCompleted: false,
+        _id: 12342}
+    };
+    beforeEach(() => {
+        app = new Koa();
+        app.use(todos.routes());
+    });
+
+    it('allows to post a todo', (done) => {
+        request(app.listen())
+            .post('/todos')
+            .type('application/json')
+            .send({
+                'title': 'TEST TODO HERE',
+                'isCompleted': false
+            })
+            .end((err, res) => {
+                res.status.should.equal(201)
+                done()
+            })
     })
 });
+
+

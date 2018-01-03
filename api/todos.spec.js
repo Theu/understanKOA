@@ -1,21 +1,59 @@
-import listTodos from './listTodos';
+import { createApi } from './todos';
+import {getDB} from '../helpers/db';
 import {
     chai,
     expect
 } from 'chai';
 
-import Koa from 'koa';
-import request from 'supertest';
+const cleanDB = () => {
+    'logic to create a db at every call'
+}
 
-describe('listTodos', () => {
-    let app;
-    beforeEach(() => {
-        app = new Koa();
-    })
-
+const {
+    getTodos,
+    createTodo,
+    readTodo,
+    updateTodo,
+    deleteTodo
+} = createApi(cleanDB);
+const todoMock = [
+    {'ttile': 'one', 'blb':'oo'},
+    {'ttile': 'two', 'blb':'ii'}
+];
+describe('createApi', () => {
     it('should be a function', () => {
-        expect(listTodos).to.be.a('function');
+        expect(createApi).to.be.a('function');
     });
-
-
 });
+
+describe('getTodos', () => {
+    it('should be a function', () => {
+        expect(getTodos).to.be.a('function');
+    });
+});
+
+describe('createTodo', () => {
+    it('should be a function', () => {
+        expect(createTodo).to.be.a('function');
+    });
+});
+
+describe('readTodo', () => {
+    it('should be a function', () => {
+        expect(readTodo).to.be.a('function');
+    });
+});
+
+describe('updateTodo', () => {
+    it('should be a function', () => {
+        expect(updateTodo).to.be.a('function');
+    });
+});
+
+describe('deleteTodo', () => {
+    it('should be a function', () => {
+        expect(deleteTodo).to.be.a('function');
+    });
+});
+
+
