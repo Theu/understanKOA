@@ -71,11 +71,7 @@ describe('GET todos', () => {
 
 describe('POST todo', () => {
     let app;
-    let todo = { 'TESTER': {
-        title: 'TEST TODO',
-        isCompleted: false,
-        _id: 12342}
-    };
+
     beforeEach(() => {
         app = new Koa();
         app.use(todos.routes());
