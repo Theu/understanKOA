@@ -4,6 +4,15 @@ export function showTodos(getTodos) {
         ctx.status = 200;
     };
 }
+export function authorizeWithEndpoint() {
+    return async function convertEndPoint(ctx) {
+        const endpoint = `${ctx.params.username}:${ctx.params.password}`
+        const endpointToBase = Buffer(endpoint).toString('Base64');
+        ctx.cookies.set('auth', `Basic ${endpointToBase}`, {maxAge: 60000})
+        ctx.body = 'please perform a correct request to /todos';
+        ctx.status = 200;
+    }
+}
 
 export function visualizeTodos(getTodos) {
     return async function showTodoHandlers(ctx) {
@@ -23,7 +32,7 @@ export function visualizeTodos(getTodos) {
             </body>
         </html>`
         ctx.body = htmlRes;
-        ctx.status =200;
+        ctx.status = 200;
     }
 }
 

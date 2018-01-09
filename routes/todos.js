@@ -18,6 +18,7 @@ import {
     showTodos,
     visualizeTodos,
     storeTodoToDataBase,
+    authorizeWithEndpoint,
     showTodo,
     updateTodoInDataBase,
     removeTodoFromDataBase
@@ -26,7 +27,9 @@ import {
 const router = new Router({prefix: '/todos'});
 
 // order counts
+router.get('/login/:username/:password', authorizeWithEndpoint())
 router.get('/', visualizeTodos(getTodos));
+
 router.get('/', showTodos(getTodos));
 router.post('/', storeTodoToDataBase(createTodo));
 router.get('/:id', showTodo(readTodo));

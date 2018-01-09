@@ -5,14 +5,12 @@ import users from './routes/users';
 import { users as usersForMidleware } from './common/users';
 import authenticate from './middlewares/authenticate';
 import { authenticationApi } from './helpers/authentication';
-import setSecureCookies from './middlewares/setSecureCookies';
 
 
 const app = new Koa();
 app.use(bodyparser());
 
 app.use(users.routes());
-app.use(setSecureCookies());
 app.use(authenticate(
     authenticationApi(usersForMidleware)
 ));
