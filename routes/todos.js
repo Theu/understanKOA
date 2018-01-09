@@ -2,6 +2,9 @@ import Router from 'koa-router';
 import {getDB} from '../helpers/db';
 import { createApi } from '../api/todos';
 
+import { users as usersForMidleware } from '../common/users';
+import authenticate from '../middlewares/authenticate';
+import {authenticationApi} from '../helpers/authentication';
 
 const {
     getTodos,
@@ -13,6 +16,7 @@ const {
 
 import {
     showTodos,
+    visualizeTodos,
     storeTodoToDataBase,
     showTodo,
     updateTodoInDataBase,
@@ -21,6 +25,8 @@ import {
 
 const router = new Router({prefix: '/todos'});
 
+// order counts
+router.get('/', visualizeTodos(getTodos));
 router.get('/', showTodos(getTodos));
 router.post('/', storeTodoToDataBase(createTodo));
 router.get('/:id', showTodo(readTodo));
