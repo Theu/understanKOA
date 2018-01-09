@@ -3,8 +3,7 @@ import  decrypt from '../helpers/decryptBase';
 
 export default function authenticate(authenticateLogin){
     return async function authenticateMiddleware(ctx, next) {
-        // ctx.response.set('WWW-Authenticate', 'Basic realm="User Visible Realm"');
-        const credentials = decrypt(ctx.request.header.authorization);
+        const credentials = decrypt(ctx.request.header.authorization) || decrypt(ctx.cookies.get('auth'));
         if (!authenticateLogin(credentials)) {
             ctx.body = 'I find your attempt disturbing';
             ctx.status = 401;
