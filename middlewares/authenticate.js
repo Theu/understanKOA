@@ -4,8 +4,9 @@ import  decrypt from '../helpers/decryptBase';
 export default function authenticate(authenticateLogin){
     return async function authenticateMiddleware(ctx, next) {
         if(ctx.request.url.indexOf('login') !== -1) {
-            return await next();
+            return next();
         }
+
         const credentials = decrypt(ctx.request.header.authorization) || decrypt(ctx.cookies.get('auth'));
         if (!authenticateLogin(credentials)) {
             ctx.body = 'please insert a valid entry for /todos/login/:username/:password';
@@ -13,7 +14,6 @@ export default function authenticate(authenticateLogin){
             return;
         }
         ctx.cookies.set('auth', ctx.request.header.authorization, {maxAge: 60000})
-        await next();
-        return;
+        return next();
     }
 }

@@ -1,5 +1,7 @@
 import Koa from 'koa';
 import bodyparser from 'koa-bodyparser';
+import logger from 'koa-logger';
+import cors from 'koa2-cors';
 import todos from './routes/todos';
 import users from './routes/users';
 import { users as usersForMidleware } from './common/users';
@@ -9,12 +11,15 @@ import { authenticationApi } from './helpers/authentication';
 
 const app = new Koa();
 app.use(bodyparser());
-
+app.use(logger())
+app.use(cors({
+    allowMethods: ['GET', 'POST', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+}))
 app.use(users.routes());
-app.use(authenticate(
-    authenticationApi(usersForMidleware)
-));
-
+// app.use(authenticate(
+//     authenticationApi(usersForMidleware)
+// ));
 app.use(todos.routes());
 app.listen(3000);
 

@@ -27,8 +27,8 @@ import {
 const router = new Router({prefix: '/todos'});
 
 // order counts
-router.get('/login/:username/:password', authorizeWithEndpoint())
-router.get('/', visualizeTodos(getTodos));
+// router.get('/login/:username/:password', authorizeWithEndpoint())
+// router.get('/', visualizeTodos(getTodos));
 
 router.get('/', showTodos(getTodos));
 router.post('/', storeTodoToDataBase(createTodo));

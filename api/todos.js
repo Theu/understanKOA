@@ -2,7 +2,11 @@ export function createApi(getDB) {
     // create here a const for getDB
     return {
         getTodos: async () => {
-            return await getDB().allDocs({ include_docs: true });
+            const todosWithAllFields = await getDB().allDocs({ include_docs: true });
+            const todos = Object.entries(todosWithAllFields.rows).map(([key, value]) => {
+                return {title: value.doc.title, id: value.doc._id}
+            })
+            return todos;
         },
         createTodo: async (request) => {
             const todo = {
