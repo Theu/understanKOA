@@ -1,12 +1,16 @@
+import todos from "../routes/todos";
+
 export function createApi(getDB) {
     // create here a const for getDB
     return {
         getTodos: async () => {
-            const todosWithAllFields = await getDB().allDocs({ include_docs: true });
-            const todos = Object.entries(todosWithAllFields.rows).map(([key, value]) => {
-                return {title: value.doc.title, id: value.doc._id}
-            })
-            return todos;
+            const todosObject = await getDB().allDocs({ include_docs: true });
+                    var todosArray = Object.entries(todosObject.rows).map(([key,value]) => {
+                        return {title:value.doc.title, id:value.doc._id}
+                    })
+                    return todosArray
+
+            // return await getDB().allDocs({ include_docs: true });
         },
         createTodo: async (request) => {
             const todo = {

@@ -23,6 +23,7 @@
     "koa-bodyparser": "^3.2.0",
     "koa-logger": "^3.1.0",
     "koa-router": "^7.3.0",
+    "koa-slow": "^2.1.0",
     "koa2-cors": "^2.0.5",
     "pouchdb": "^6.3.4"
   },
