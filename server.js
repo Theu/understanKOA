@@ -17,7 +17,7 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }))
-// app.use(slow({delay:2000}))
+app.use(slow({delay:2000}))
 app.use(users.routes());
 // app.use(authenticate(
 //     authenticationApi(usersForMidleware)
